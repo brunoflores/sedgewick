@@ -1,0 +1,4 @@
+(executable
+ (public_name connectivity)
+ (name main)
+ (libraries connectivity))
