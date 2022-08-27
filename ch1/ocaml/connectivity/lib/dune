@@ -1,4 +1,4 @@
 (library
  (name connectivity)
- (modules quickfind quickfind_array)
- (modules_without_implementation quickfind))
+ (modules union_find quickfind_array)
+ (modules_without_implementation union_find))
