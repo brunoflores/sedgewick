@@ -1,1 +1,2 @@
-val connected : int * int -> (int * int) option
+val find : int * int -> (int * int) option
+val union : int * int -> unit
