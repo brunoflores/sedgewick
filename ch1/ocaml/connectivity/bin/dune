@@ -8,3 +8,9 @@
  (public_name gen)
  (modules gen)
  (name gen))
+
+(executable
+ (public_name rand)
+ (modules rand)
+ (name rand)
+ (libraries unix connectivity))

@@ -12,7 +12,7 @@
 
    To perform the union, we just link one to the other. *)
 
-let seen : int array = Array.init 10_000 (fun i -> i)
+let seen : int array = Array.init 100_000 (fun i -> i)
 
 let find (p, q) : bool =
   let rec find_aux (x : int) : int =

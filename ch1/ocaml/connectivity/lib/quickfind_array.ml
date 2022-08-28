@@ -1,4 +1,4 @@
-let seen : int array = Array.init 10_000 (fun i -> i)
+let seen : int array = Array.init 100_000 (fun i -> i)
 
 let union (p, q) : unit =
   let seen_p = seen.(p) in

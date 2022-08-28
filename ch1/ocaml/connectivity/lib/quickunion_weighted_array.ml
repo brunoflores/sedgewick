@@ -1,4 +1,4 @@
-let n = 10_000
+let n = 100_000
 let seen : int array = Array.init n (fun i -> i)
 
 (* For each object with [seen.(i) = i], [size.(i)] keeps the number of nodes
@@ -21,3 +21,5 @@ let find (p, q) : bool =
       seen.(j) <- i;
       size.(i) <- size.(i) + size.(j));
     false)
+
+let average_distance () = Array.fold_left ( + ) 0 size / n
