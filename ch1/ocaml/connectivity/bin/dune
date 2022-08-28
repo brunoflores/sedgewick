@@ -1,4 +1,10 @@
 (executable
  (public_name connectivity)
  (name main)
- (libraries connectivity))
+ (modules main)
+ (libraries unix connectivity))
+
+(executable
+ (public_name gen)
+ (modules gen)
+ (name gen))

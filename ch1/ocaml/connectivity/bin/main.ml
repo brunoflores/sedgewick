@@ -1,13 +1,17 @@
-let pr result = List.iter (fun (p, q) -> Printf.printf "%d %d\n" p q) result
+let _pr result = List.iter (fun (p, q) -> Printf.printf "%d %d\n" p q) result
 
-let run (module M : Connectivity.Union_find.S) (pairs : (int * int) list) :
-    (int * int) list =
-  let res =
-    List.fold_left
-      (fun acc pair -> if M.find pair then acc else pair :: acc)
-      [] pairs
+let run (module M : Connectivity.Union_find.S) (n : int)
+    (gen : unit -> int * int) : float * (int * int) list =
+  let start = Unix.gettimeofday () in
+  let rec run_aux res =
+    if List.length res = n - 1 then res
+    else
+      let pair = gen () in
+      if M.find pair then run_aux res else run_aux (pair :: res)
   in
-  List.rev res
+  let res = run_aux [] in
+  let now = Unix.gettimeofday () in
+  (now -. start, List.rev res)
 
 let all_equals pairs : bool =
   let two_equals (left : (int * int) list) (right : (int * int) list) : bool =
@@ -31,16 +35,31 @@ let rec input_all ch pairs : (int * int) list =
       with _ -> failwith "failed to parse")
   | None -> List.rev pairs
 
+let summarise results : unit =
+  List.iter (fun (elapsed, _) -> Printf.printf "%f\n" elapsed) results
+
 let () =
   let input = input_all stdin [] in
-  let results =
+  let n = 10 in
+  let gen () =
+    let i = ref 0 in
+    fun () ->
+      try
+        let v = List.nth input !i in
+        incr i;
+        v
+      with _ -> failwith @@ Format.sprintf "out of input: %d" !i
+  in
+  let results_timed =
     [
-      run (module Connectivity.Quickfind_array) input;
-      run (module Connectivity.Quickunion_array) input;
-      run (module Connectivity.Quickunion_weighted_array) input;
+      run (module Connectivity.Quickfind_array) n (gen ());
+      run (module Connectivity.Quickunion_array) n (gen ());
+      run (module Connectivity.Quickunion_weighted_array) n (gen ());
     ]
   in
+  let results = List.map (fun (_, pair) -> pair) results_timed in
   match results with
   | [] -> ()
-  | result :: _ ->
-      if all_equals results then pr result else print_endline "failed"
+  | _result :: _ ->
+      if all_equals results then summarise results_timed
+      else print_endline "failed"
