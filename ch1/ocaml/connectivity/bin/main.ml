@@ -19,7 +19,16 @@ let () =
     | None -> pairs
   in
   let input = input_all stdin [] in
-  let quickfind_array_res = run (module Connectivity.Quickfind_array) input in
-  let quickunion_array_res = run (module Connectivity.Quickunion_array) input in
-  if equals quickfind_array_res quickunion_array_res <> true then
-    print_endline "FAILED"
+  let results =
+    [
+      run (module Connectivity.Quickfind_array) input;
+      run (module Connectivity.Quickunion_array) input;
+      run (module Connectivity.Quickunion_weighted_array) input;
+    ]
+  in
+  let rec check_all : (int * int) list list -> bool = function
+    | [] | _ :: [] -> true
+    | left :: right :: rest ->
+        if equals left right then check_all (right :: rest) else false
+  in
+  if check_all results <> true then print_endline "failed"
