@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // For simplicity.
-#define N 10
+#define N 100000
 
 int main(void) {
   int i;
@@ -41,6 +41,6 @@ int main(void) {
     }
 
     // Output.
-    printf(" %d %d\n", p, q);
+    // printf(" %d %d\n", p, q);
   }
 }

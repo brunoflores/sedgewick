@@ -4,16 +4,22 @@ let run (module M : Union_find.S) (n : int) (gen : unit -> int * int) :
     float * int * (int * int) list =
   let start = Unix.gettimeofday () in
   let m = ref 0 in
-  let rec run_aux res =
-    if List.length res = n - 1 then res
+  let i = ref 0 in
+  let res = Array.init 100_000 (fun _ -> (0, 0)) in
+  let rec run_aux () =
+    if !i = n - 1 then ()
     else
       let _ = incr m in
       let pair = gen () in
-      if M.find pair then run_aux res else run_aux (pair :: res)
+      if M.find pair then run_aux ()
+      else (
+        res.(!i) <- pair;
+        incr i;
+        run_aux ())
   in
-  let res = run_aux [] in
+  let _ = run_aux () in
   let now = Unix.gettimeofday () in
-  (now -. start, !m, List.rev res)
+  (now -. start, !m, Array.to_list res)
 
 let all_equals pairs : bool =
   let two_equals (left : (int * int) list) (right : (int * int) list) : bool =
@@ -28,14 +34,22 @@ let all_equals pairs : bool =
   in
   all_equals_aux pairs
 
-let rec input_all ch pairs : (int * int) list =
-  match In_channel.input_line ch with
-  | Some line -> (
-      try
-        let pair = Scanf.sscanf line "%d %d" (fun p q -> (p, q)) in
-        input_all ch (pair :: pairs)
-      with _ -> failwith "failed to parse")
-  | None -> List.rev pairs
+let input_all ch =
+  let out = Array.init 100_000 (fun _ -> (0, 0)) in
+  let i = ref 0 in
+  let rec aux () =
+    match In_channel.input_line ch with
+    | Some line -> (
+        try
+          let pair = Scanf.sscanf line "%d %d" (fun p q -> (p, q)) in
+          out.(!i) <- pair;
+          incr i;
+          aux ()
+        with _ -> failwith "failed to parse")
+    | None -> ()
+  in
+  aux ();
+  out
 
 let summarise results : unit =
   List.iter

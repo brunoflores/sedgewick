@@ -5,11 +5,11 @@ let seen : int array = Array.init n (fun i -> i)
    in the associated tree. *)
 let size : int array = Array.init n (fun _ -> 1)
 
+let rec find_aux (x : int) : int =
+  let peek = seen.(x) in
+  if peek = x then x else find_aux peek
+
 let find (p, q) : bool =
-  let rec find_aux (x : int) : int =
-    let peek = seen.(x) in
-    if peek = x then x else find_aux peek
-  in
   let i = find_aux p in
   let j = find_aux q in
   if i = j then true
