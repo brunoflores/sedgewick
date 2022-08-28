@@ -1,12 +1,17 @@
+let pr result = List.iter (fun (p, q) -> Printf.printf "%d %d\n" p q) result
+
 let run (module M : Connectivity.Union_find.S) (pairs : (int * int) list) :
     (int * int) list =
-  List.fold_left
-    (fun acc pair -> if M.find pair then acc else pair :: acc)
-    [] pairs
+  let res =
+    List.fold_left
+      (fun acc pair -> if M.find pair then acc else pair :: acc)
+      [] pairs
+  in
+  List.rev res
 
-let equals left right : bool =
+let equals (left : (int * int) list) (right : (int * int) list) : bool =
   if List.length left <> List.length right then false
-  else List.for_all2 (fun l r -> l = r) left right
+  else List.for_all2 (fun (p1, q1) (p2, q2) -> p1 = p2 && q1 = q2) left right
 
 let () =
   let rec input_all ch pairs : (int * int) list =
@@ -16,7 +21,7 @@ let () =
           let pair = Scanf.sscanf line "%d %d" (fun p q -> (p, q)) in
           input_all ch (pair :: pairs)
         with _ -> failwith "failed to parse")
-    | None -> pairs
+    | None -> List.rev pairs
   in
   let input = input_all stdin [] in
   let results =
@@ -31,4 +36,7 @@ let () =
     | left :: right :: rest ->
         if equals left right then check_all (right :: rest) else false
   in
-  if check_all results <> true then print_endline "failed"
+  match results with
+  | [] -> ()
+  | result :: _ ->
+      if check_all results then pr result else print_endline "failed"
