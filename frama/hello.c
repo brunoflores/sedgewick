@@ -33,6 +33,7 @@ int main() {
   //@ assert a == 37 && b == 42;
 
   int c = abs(-42);
+  //@ assert got_42: c == 42;
 
   return 0;
 }
