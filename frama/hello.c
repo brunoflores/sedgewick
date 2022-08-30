@@ -15,6 +15,8 @@ void swap(int *a, int *b) {
 /*@
   requires INT_MIN < val;
 
+  assigns \nothing;
+
   ensures \result >= 0;
   ensures (val >= 0 ==> \result == val) &&
           (val <  0 ==> \result == -val);
@@ -25,6 +27,7 @@ int abs(int val) {
   return val;
 }
 
+/*@ assigns \nothing; */
 int main() {
   int a = 42;
   int b = 37;
