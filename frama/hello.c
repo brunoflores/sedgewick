@@ -90,8 +90,19 @@ void reset_1st_if_2nd_is_true (int *a, int const *b) {
 
   ensures \result == *p + *q;
 */
-int add (int *p, int *q) {
-  return *p + *q;
+int add(int *p, int *q) { return *p + *q; }
+
+/*@
+  requires \valid_read(a) && \valid_read(b);
+
+  assigns \nothing;
+
+  ensures *a < *b ==> \result == *b;
+  ensures *a >= *b ==> \result == *a;
+  ensures \result == *a || \result == *b;
+*/
+int max_ptr(int *a, int *b) {
+  return (*a < *b) ? *b : *a;
 }
 
 int h = 42;
@@ -134,6 +145,11 @@ int main() {
   xx = add(&p, &p);
   //@ assert xx == p + p;
   //@ assert xx == 48;
+
+  int aaa = 24;
+  int bbb = 42;
+  int xxx = max_ptr (&aaa, &bbb);
+  //@ assert xxx == 42;
 
   return 0;
 }
