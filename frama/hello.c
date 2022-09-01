@@ -37,6 +37,17 @@ int abs(int val) {
 */
 int plus_5(int *a) { return *a + 5; }
 
+/*@
+  requires \valid(a) && \valid_read(b);
+  requires \separated(a, b);
+  requires *a >= 0 && *b >= 0;
+  requires (*a + *b) < INT_MAX;
+  assigns *a;
+  ensures *a == \old(*a) + *b;
+  ensures *b == \old(*b);
+*/
+void incr_a_by_b(int *a, int const *b) { *a += *b; }
+
 int h = 42;
 
 /*@ assigns \nothing; */
