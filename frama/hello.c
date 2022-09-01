@@ -81,6 +81,19 @@ void reset_1st_if_2nd_is_true (int *a, int const *b) {
   if (*b) *a = 0;
 }
 
+// Receive two pointers and returns the sum of the pointed values.
+/*@
+  requires \valid_read(p) && \valid_read(q);
+  requires INT_MIN <= *p + *q <= INT_MAX;
+
+  assigns \nothing;
+
+  ensures \result == *p + *q;
+*/
+int add (int *p, int *q) {
+  return *p + *q;
+}
+
 int h = 42;
 
 /*@ assigns \nothing; */
@@ -111,6 +124,16 @@ int main() {
   reset_1st_if_2nd_is_true(&aa, &bb);
   //@ assert aa == 0;
   //@ assert bb == 1;
+
+  int p = 24;
+  int q = 42;
+  int xx;
+  xx = add(&p, &q);
+  //@ assert xx == p + q;
+  //@ assert xx == 66;
+  xx = add(&p, &p);
+  //@ assert xx == p + p;
+  //@ assert xx == 48;
 
   return 0;
 }
