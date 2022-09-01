@@ -27,13 +27,27 @@ int abs(int val) {
   return val;
 }
 
+/*@
+  requires \valid_read(a);
+  requires *a <= INT_MAX - 5;
+
+  assigns \nothing;
+
+  ensures \result == *a + 5;
+*/
+int plus_5(int *a) { return *a + 5; }
+
+int h = 42;
+
 /*@ assigns \nothing; */
 int main() {
   int a = 42;
   int b = 37;
 
+  //@ assert h == 42;
   swap(&a, &b);
   //@ assert a == 37 && b == 42;
+  //@ assert h == 42;
 
   int c = abs(-42);
   //@ assert got_42: c == 42;
