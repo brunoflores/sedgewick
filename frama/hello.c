@@ -58,11 +58,28 @@ int plus_5(int *a) { return *a + 5; }
   requires \separated(a, b);
   requires *a >= 0 && *b >= 0;
   requires (*a + *b) < INT_MAX;
+
   assigns *a;
+
   ensures *a == \old(*a) + *b;
   ensures *b == \old(*b);
 */
 void incr_a_by_b(int *a, int const *b) { *a += *b; }
+
+// Reset its first parameter if and only if the second is true.
+/*@
+  requires \valid(a) && \valid_read(b);
+  requires \separated(a, b);
+
+  assigns *a;
+
+  ensures \old(*b) ==> *a == 0;
+  ensures ! \old(*b) ==> *a == \old(*a);
+  ensures *b == \old(*b);
+*/
+void reset_1st_if_2nd_is_true (int *a, int const *b) {
+  if (*b) *a = 0;
+}
 
 int h = 42;
 
@@ -83,6 +100,17 @@ int main() {
   unsigned rem = 0;
   div_rem(4, 2, &div, &rem);
   //@ assert div == 2;
+
+  int aa = 5;
+  int const x = 0;
+  //@ assert aa == 5;
+  reset_1st_if_2nd_is_true(&aa, &x);
+  //@ assert aa == 5;
+  //@ assert x == 0;
+  int const bb = 1;
+  reset_1st_if_2nd_is_true(&aa, &bb);
+  //@ assert aa == 0;
+  //@ assert bb == 1;
 
   return 0;
 }
