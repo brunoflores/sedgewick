@@ -27,6 +27,30 @@ int abs(int val) {
   return val;
 }
 
+// Here's using abs to illustrate behaviours:
+/*@
+  requires val > INT_MIN;
+  assigns \nothing;
+
+  ensures \result >= 0;
+
+  behavior pos:
+    assumes 0 <= val;
+    ensures \result == val;
+
+  behavior neg:
+    assumes val < 0;
+    ensures \result == -val;
+
+  complete behaviors;
+  disjoint behaviors;
+*/
+int abs_b(int val) {
+  if (val < 0)
+    return -val;
+  return val;
+}
+
 /*@
   requires \valid(q);
   requires \valid(r);
@@ -77,8 +101,9 @@ void incr_a_by_b(int *a, int const *b) { *a += *b; }
   ensures ! \old(*b) ==> *a == \old(*a);
   ensures *b == \old(*b);
 */
-void reset_1st_if_2nd_is_true (int *a, int const *b) {
-  if (*b) *a = 0;
+void reset_1st_if_2nd_is_true(int *a, int const *b) {
+  if (*b)
+    *a = 0;
 }
 
 // Receive two pointers and returns the sum of the pointed values.
@@ -116,16 +141,22 @@ int max_ptr(int *a, int *b) { return (*a < *b) ? *b : *a; }
   ensures \old(*a == *b < *c || *a == *c < *b || *b == *c < *a) ==> *a == *b;
   ensures \old(*a == *b > *c || *a == *c > *b || *b == *c > *a) ==> *b == *c;
 */
-void order_3 (int *a, int *b, int *c) {
+void order_3(int *a, int *b, int *c) {
   int tmp;
   if (*a > *b) {
-    tmp = *b; *b = *a; *a = tmp;
+    tmp = *b;
+    *b = *a;
+    *a = tmp;
   }
   if (*a > *c) {
-    tmp = *c; *c = *a; *a = tmp;
+    tmp = *c;
+    *c = *a;
+    *a = tmp;
   }
   if (*b > *c) {
-    tmp = *b; *b = *c; *c = tmp;
+    tmp = *b;
+    *b = *c;
+    *c = tmp;
   }
 }
 
@@ -172,7 +203,7 @@ int main() {
 
   int aaa = 24;
   int bbb = 42;
-  int xxx = max_ptr (&aaa, &bbb);
+  int xxx = max_ptr(&aaa, &bbb);
   //@ assert xxx == 42;
 
   int a1 = 5;
