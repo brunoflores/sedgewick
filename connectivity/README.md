@@ -49,3 +49,13 @@ and data structures that can:
 
 1. *Find* the set containing a given item;
 2. Replace the sets containing two given items by their *union*.
+
+The sets represent *connected components*: subsets of the objects with the
+property that any two objects in a given component are connected.
+
+This approach reduces the development of an algorithmic solution for
+connectivity to the tasks of:
+
+1. Defining a data structure representing the sets, and
+2. Developing *union* and *find* algorithms that efficiently use that data
+   strucuture.
