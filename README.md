@@ -69,3 +69,17 @@ approaches:
 
 The average case might be a methematical fiction, and the worst case might be a
 bizarre construction.
+
+# Growth of functions
+
+A *primary parameter N*, most often directly proportional to the size of the
+data set being processed. Examples:
+
+* The degree of a polynomial;
+* The size of a file to be sorted and searched;
+* The number of characters in a text string;
+* Some other abstract measure of the size of the problem.
+
+If multiple, reduce the analysis to just one by expressing one as a function of
+the other, or by considering one parameter at a time holding the others
+constant.
