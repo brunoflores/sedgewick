@@ -6,6 +6,8 @@ potential to reap savings factors of millions or billions, or more.
 Also, as the scale of our computational power and out applications increases,
 the gap between a fast algorithm and a slow one grows.
 
+About using a computer effectively.
+
 1. Decide on a complete and specific problem statement, including indentifying
    fundamental abstract operations that are intrinsic to the problem;
 2. Develop a succint implementation for a straightforward algorithm;
@@ -45,3 +47,25 @@ Perhaps the most common mistake in selecting an algorithm:
 Perhaps the second most common mistake:
 
 * To pay too much attention to performance characteristics.
+
+## The idealized world of the analyst
+
+* To compare different algorithms for the same task;
+* To predict performance in a new environment;
+* To set values of algorithm parameters.
+
+Identify the abstract operations on which the alhorithm is based, to
+separate the analysis from the implementation: properties of the algorithm
+versus properties of the computer.
+
+The analysis amounts to determining the frequency of execution of a few
+fundamental operations. First look for rough estimates of these quantities.
+
+Study the data and model the input that might be presented to the algorithm. Two
+approaches:
+
+* *Average-case* performance: assume the input is random;
+* *Worst-case* performance: look for perverse input.
+
+The average case might be a methematical fiction, and the worst case might be a
+bizarre construction.
