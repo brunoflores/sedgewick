@@ -18,7 +18,7 @@ About using a computer effectively.
 5. Strive for worst-case performance guarantees when possible, but accept good
    performance on actual data when available.
 
-## Empirical analysis
+# Empirical analysis
 
 On our use of *empirical analysis*: given two algorithms to solve the same
 problem, we run them both to see which one takes longer. When empirical studies
@@ -38,7 +38,7 @@ algorithms on the basis of their use of such operations.
 
 But, **we cannot run empirical tests for a program that is not yet written**.
 
-## Other challenges
+# Other challenges
 
 Perhaps the most common mistake in selecting an algorithm:
 
@@ -48,7 +48,7 @@ Perhaps the second most common mistake:
 
 * To pay too much attention to performance characteristics.
 
-## The idealized world of the analyst
+# The idealized world of the analyst
 
 * To compare different algorithms for the same task;
 * To predict performance in a new environment;
@@ -83,3 +83,8 @@ data set being processed. Examples:
 If multiple, reduce the analysis to just one by expressing one as a function of
 the other, or by considering one parameter at a time holding the others
 constant.
+
+# Constants
+
+> "We would prefer an algorithm using N^2 nanoseconds over one using log N
+> centuries."
