@@ -4,3 +4,4 @@
   on to the next pair; if they are not, we do a *union* operation and write out
   the pair.
 */
+int main() { return 0; }
