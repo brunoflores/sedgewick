@@ -1,15 +1,18 @@
-PROGS=sequential binary
+CFLAGS+=-Wall -Wextra -Werror
+PROGS=$(subst bin/, build/, $(basename $(wildcard bin/*.c)))
 
-BINS=$(addprefix build/, $(PROGS))
+.PHONY: all
+all: $(PROGS)
 
-all: $(BINS)
+build/%: obj/%.o
+	cc $(CFLAGS) $< -o $@
+	size $@
 
 obj/%.o: bin/%.c
-	cc -c $(CFLAGS) $^ -o $@
-
-$(BINS): $(addprefix obj/, $(addsuffix .o, $(PROGS)))
-	cc $(CFLAGS) $(patsubst build/%, obj/%, $(addsuffix .o, $@)) -o $@
+	cc $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
 	rm -rf build/* obj/*
+
+.SECONDARY:
