@@ -1,5 +1,7 @@
 _build/
 
+**/c/.cache
+**/c/compile_commands.json
 **/c/build/
 **/c/obj/
 
