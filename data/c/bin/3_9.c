@@ -11,7 +11,7 @@ struct node {
 int main(int __attribute__((unused)) argc, char *argv[]) {
   int i;
   int N = atoi(argv[1]);
-  int M = atoi(argv[2]);
+  int const M = atoi(argv[2]);
 
   link t = malloc(sizeof *t);
   link x = t;
@@ -30,7 +30,7 @@ int main(int __attribute__((unused)) argc, char *argv[]) {
       x = x->next;
     }
     {
-      link tmp = x->next;
+      link const tmp = x->next;
       x->next = x->next->next;
       free(tmp);
     };
