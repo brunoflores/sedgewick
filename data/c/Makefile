@@ -1,4 +1,5 @@
 LIBS=-lm
+INCLUDE=-I include
 CFLAGS+=-Wall -Wextra -Werror
 PROGS=$(subst bin/, build/, $(basename $(wildcard bin/*.c)))
 
@@ -6,11 +7,16 @@ PROGS=$(subst bin/, build/, $(basename $(wildcard bin/*.c)))
 all: $(PROGS)
 
 build/%: obj/%.o
-	cc $(CFLAGS) $< -o $@ $(LIBS)
+	cc $(CFLAGS) $^ -o $@ $(LIBS)
 	size $@
 
+build/3_2: obj/int.o
+
 obj/%.o: bin/%.c
-	cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) $(INCLUDE) -c $^ -o $@
+
+obj/int.o: lib/int.c include/Num.h
+	cc $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 .PHONY: clean
 clean:

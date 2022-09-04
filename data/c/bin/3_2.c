@@ -1,10 +1,7 @@
+#include "Num.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef int Number;
-
-Number randNum() { return rand(); }
 
 int main(int __attribute__((unused)) argc, char *argv[]) {
   int i;
