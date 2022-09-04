@@ -11,12 +11,14 @@ all: $(PROGS)
 
 3_2: lib/int.o
 3_8: lib/point.o
+3_13: lib/list.o
 
 %.o: %.c
 	cc $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 lib/point.o: lib/point.c include/Point.h
 lib/int.o: lib/int.c include/Num.h
+lib/list.o: lib/list.c include/List.h
 
 .PHONY: clean
 clean:
