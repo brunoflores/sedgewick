@@ -30,4 +30,6 @@ int main(int __attribute__((unused)) argc, char *argv[]) {
     }
     printf("\n");
   }
+
+  free(f);
 }
