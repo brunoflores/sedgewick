@@ -26,5 +26,7 @@ int main(int __attribute__((unused)) argc, char *argv[]) {
     }
   }
 
+  free(a);
+
   printf("%d edges shorter than %f\n", cnt, d);
 }
