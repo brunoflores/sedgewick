@@ -6,7 +6,7 @@ int heads(void) { return rand() < RAND_MAX / 2; }
 int main(int __attribute__((unused)) argc, char *argv[]) {
   int i;
   int j;
-  int cnt = 0;
+  int head_count = 0;
   int N = atoi(argv[1]);
   int M = atoi(argv[2]);
 
@@ -15,10 +15,13 @@ int main(int __attribute__((unused)) argc, char *argv[]) {
     f[j] = 0;
   }
 
-  for (i = 0; i < M; i++, f[cnt]++) {
-    for (cnt = 0, j = 0; j <= N; j++) {
+  // M trials, N flips.
+  for (i = 0; i < M; i++, f[head_count]++) {
+    // Trial:
+    for (head_count = 0, j = 0; j <= N; j++) {
+      // Flip:
       if (heads() == 1) {
-        cnt++;
+        head_count++;
       }
     }
   }
