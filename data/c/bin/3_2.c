@@ -1,11 +1,24 @@
 #include "Num.h"
+#include <ctype.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int main(int __attribute__((unused)) argc, char *argv[]) {
+void avg(int);
+
+int main(int argc, char *argv[]) {
+  int index;
+  for (index = optind; index < argc; index++) {
+    avg(atoi(argv[index]));
+  }
+  return 0;
+}
+
+void avg(int const N) {
+  printf("Called with %d\n", N);
+
   int i;
-  int N = atoi(argv[1]);
   float m1 = 0.0;
   float m2 = 0.0;
   Number x;
