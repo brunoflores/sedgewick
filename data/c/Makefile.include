@@ -1,0 +1,28 @@
+LIBS=-lm
+INCLUDE=-I ../include
+PROGS=$(subst ../bin/, , $(basename $(wildcard ../bin/*.c)))
+
+.PHONY: all
+all: $(PROGS)
+
+%: bin/%.o
+	cc $(CFLAGS) $^ -o $@ $(LIBS)
+	size $@
+
+3_2: lib/int.o
+3_8: lib/point.o
+
+%.o: %.c | dirs
+	cc $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+lib/point.o: lib/point.c include/Point.h
+lib/int.o: lib/int.c include/Num.h
+
+dirs:
+	mkdir bin lib
+
+.PHONY: clean
+clean:
+	rm -rf bin/*.o lib/*.o $(PROGS)
+
+.SECONDARY:
