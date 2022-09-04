@@ -1,3 +1,4 @@
+LIBS=-lm
 CFLAGS+=-Wall -Wextra -Werror
 PROGS=$(subst bin/, build/, $(basename $(wildcard bin/*.c)))
 
@@ -5,7 +6,7 @@ PROGS=$(subst bin/, build/, $(basename $(wildcard bin/*.c)))
 all: $(PROGS)
 
 build/%: obj/%.o
-	cc $(CFLAGS) $< -o $@
+	cc $(CFLAGS) $< -o $@ $(LIBS)
 	size $@
 
 obj/%.o: bin/%.c
