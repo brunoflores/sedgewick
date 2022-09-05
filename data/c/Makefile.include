@@ -12,6 +12,7 @@ all: $(PROGS)
 3_2: lib/int.o
 3_8: lib/point.o
 3_13: lib/list.o
+3_20: lib/lib.o lib/point.o
 
 %.o: %.c
 	cc $(CFLAGS) $(INCLUDE) -c $< -o $@
