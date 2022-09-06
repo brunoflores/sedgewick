@@ -1,0 +1,23 @@
+LIBS=-lm
+INCLUDE=-I ../include
+PROGS=$(subst ../bin/, , $(basename $(wildcard ../bin/*.c)))
+
+.PHONY: all
+all: $(PROGS)
+
+%: bin/%.o
+	cc $(CFLAGS) $^ -o $@ $(LIBS)
+	size $@
+
+%.o: %.c
+	cc $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+4_2: include/item.h lib/stack_array.o
+
+lib/stack_array.o: include/item.h lib/stack_array.c
+
+.PHONY: clean
+clean:
+	rm -rf bin/*.o lib/*.o $(PROGS)
+
+.SECONDARY:
