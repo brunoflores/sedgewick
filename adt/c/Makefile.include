@@ -1,6 +1,8 @@
 LIBS=-lm
 INCLUDE=-I ../include
-PROGS=$(subst ../bin/, , $(basename $(wildcard ../bin/*.c)))
+PROGS=\
+	$(subst ../bin/, , $(basename $(wildcard ../bin/*.c))) \
+# 4_2_linked_list
 
 .PHONY: all
 all: $(PROGS)
@@ -13,8 +15,14 @@ all: $(PROGS)
 	cc $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 4_2: include/item.h lib/stack_array.o
+# 4_2_linked_list: include/item.h lib/stack_linked_list.o
 
 lib/stack_array.o: include/item.h lib/stack_array.c
+lib/stack_linked_list.o: include/item.h lib/stack_linked_list.c
+
+# PROGS: ../bin/4_2_linked_list.c
+# ../bin/4_2_linked_list.c: ../bin/4_2.c
+# 	cp $< $@
 
 .PHONY: clean
 clean:
