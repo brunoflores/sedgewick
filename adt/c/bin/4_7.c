@@ -7,7 +7,7 @@ int main(int __attribute__((unused)) argc, char *argv[]) {
   int q;
   int N = atoi(argv[1]);
   uf_init(N);
-  while (scanf("%d %d\n", &p, &q) == 2) {
+  while (scanf("%d %d", &p, &q) == 2) {
     if (!uf_find(p, q)) {
       uf_union(p, q);
       printf(" %d %d\n", p, q);
