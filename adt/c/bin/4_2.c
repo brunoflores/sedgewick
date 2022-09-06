@@ -24,3 +24,7 @@ int main(int argc __attribute((unused)), char *argv[]) {
   }
   printf("%d \n", stack_pop());
 }
+
+// Usage:
+// $ ./4_2 "41 1 +"
+// 42
