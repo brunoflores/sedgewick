@@ -5,7 +5,8 @@ PROGS=\
 # 4_2_linked_list
 
 .PHONY: all
-all: $(PROGS)
+all: $(PROGS) \
+	lib/fifo_linked_list.o
 
 %: bin/%.o
 	cc $(CFLAGS) $^ -o $@ $(LIBS)
@@ -20,6 +21,7 @@ all: $(PROGS)
 
 lib/stack_array.o: include/item.h lib/stack_array.c
 lib/stack_linked_list.o: include/item.h lib/stack_linked_list.c
+lib/fifo_linked_list.o: include/item.h include/fifo.h lib/fifo_linked_list.c
 
 # PROGS: ../bin/4_2_linked_list.c
 # ../bin/4_2_linked_list.c: ../bin/4_2.c
