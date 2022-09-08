@@ -7,7 +7,8 @@ PROGS=\
 .PHONY: all
 all: $(PROGS) \
 	lib/fifo_linked_list.o \
-	lib/fifo_array.o
+	lib/fifo_array.o \
+	lib/stack_array_no_duplicates.o
 
 %: bin/%.o
 	cc $(CFLAGS) $^ -o $@ $(LIBS)
@@ -22,6 +23,7 @@ all: $(PROGS) \
 
 lib/stack_array.o: include/item.h lib/stack_array.c
 lib/stack_linked_list.o: include/item.h lib/stack_linked_list.c
+lib/stack_array_no_duplicates.o: include/item.h include/stack.h lib/stack_array_no_duplicates.c
 lib/fifo_linked_list.o: include/item.h include/fifo.h lib/fifo_linked_list.c
 lib/fifo_array.o: include/item.h include/fifo.h lib/fifo_array.c
 
