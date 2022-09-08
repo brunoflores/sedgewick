@@ -20,7 +20,7 @@ all: $(PROGS) \
 4_2: include/item.h lib/stack_array.o
 # 4_2_linked_list: include/item.h lib/stack_linked_list.o
 4_7: include/union_find.h lib/weighted_quick_union.o
-4_13: include/complex.h lib/complex.o
+4_13: include/complex_abstract.h lib/complex_abstract.o
 
 lib/stack_array.o: include/item.h lib/stack_array.c
 lib/stack_linked_list.o: include/item.h lib/stack_linked_list.c
