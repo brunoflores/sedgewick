@@ -26,4 +26,7 @@ void show(Item a[], int left, int right) {
   printf("\n");
 }
 
-void sort(Item a[], int left, int right) { return; }
+void sort(Item __attribute__((unused)) a[], int __attribute__((unused)) left,
+          __attribute__((unused)) int right) {
+  return;
+}
