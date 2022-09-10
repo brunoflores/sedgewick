@@ -15,12 +15,13 @@ typedef int Item;
   if (less(B, A))                                                              \
   exch(A, B)
 
-// Intertion sort.
+// Insertion sort.
 void sort(Item a[], int l, int r) {
   int i;
   int j;
   for (i = l + 1; i <= r; i++) {
     for (j = i; j > l; j--) {
+      // N^2
       compexch(a[j - 1], a[j]);
     }
   }
