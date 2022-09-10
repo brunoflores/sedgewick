@@ -26,6 +26,28 @@ void insertion(Item a[], int l, int r) {
   }
 }
 
+// This is an improvement over the above because:
+//   a. it first puts the smallest element in the array into the first position,
+//      so that that element can serve as a sentinel;
+//   b. it does single assignment in the inner loop;
+//   c. it terminates the inner loop when the element being inserted is in
+//      position.
+void insertion_6_3(Item a[], int l, int r) {
+  int i;
+  for (i = r; i > l; i--) {
+    compexch(a[i - 1], a[i]);
+  }
+  for (i = l + 2; i <= r; i++) {
+    int j = i;
+    Item v = a[i];
+    while (less(v, a[j - 1])) {
+      a[j] = a[j - 1];
+      j--;
+    }
+    a[j] = v;
+  }
+}
+
 void selection(Item a[], int l, int r) {
   int i;
   int j;
