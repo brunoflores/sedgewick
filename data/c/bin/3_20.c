@@ -44,10 +44,10 @@ int main(int __attribute__((unused)) argc, char *argv[]) {
   int N = atoi(argv[1]);
   float d = atof(argv[2]);
   G = 1 / d;
-  grid = (link **) malloc2d(G + 2, G + 2, (sizeof(link)));
+  grid = (link **)malloc2d(G + 2, G + 2, (sizeof(link)));
 
-  for (i = 0; i < G+2; i++) {
-    for (j = 0; j < G+2; j++) {
+  for (i = 0; i < G + 2; i++) {
+    for (j = 0; j < G + 2; j++) {
       grid[i][j] = NULL;
     }
   }
@@ -55,6 +55,8 @@ int main(int __attribute__((unused)) argc, char *argv[]) {
   for (i = 0; i < N; i++) {
     gridinsert(randFloat(), randFloat());
   }
+
+  free(grid);
 
   printf("%d edges shorter than %f\n", cnt, d);
 }
